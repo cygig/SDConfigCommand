@@ -149,7 +149,7 @@ The main difference is that the default function parses the characters as they a
 The flowchart below depicts how the configuration file is read and write to in lieu of comments in the source code. Please note that the flowchart is only a guide, not all variables and functions are exactly the same in working and in name as the code. Certain simple logics are also glossed over in the flowchart.
 
 ## Read Config File Flowchart
-![Image](SDConfigCommand Read Config (Char Analysis)_Page_1.jpg)
+![Image](flowcharts/SDConfigCommand Read Config (Char Analysis)_Page_1.jpg)
 ![Image](SDConfigCommand Read Config (Char Analysis)_Page_2.jpg)
 
 ## Write Config File Flowchart
