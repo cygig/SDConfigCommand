@@ -1,0 +1,11 @@
+SDConfigCommand	KEYWORD1
+set		KEYWORD2
+readConfig	KEYWORD2
+writeConfig	KEYWORD2
+openInSerial	KEYWORD2
+getCmd		KEYWORD2
+getCmdS		KEYWORD2
+getValue	KEYWORD2
+getValueS	KEYWORD2
+getValueInt	KEYWORD2
+getValueFloat	KEYWORD2
