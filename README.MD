@@ -153,8 +153,8 @@ The flowchart below depicts how the configuration file is read and write to in l
 ![Image](flowcharts/SDConfigCommand%20Read%20Config%20(Char%20Analysis)_Page_2.jpg)
 
 ## Write Config File Flowchart
-![Image](SDConfigCommand Write Config (Char Analysis)_Page_1.jpg)
-![Image](SDConfigCommand Write Config (Char Analysis)_Page_2.jpg)
+![Image](flowcharts/SDConfigCommand%20Write%20Config%20(Char%20Analysis)_Page_1.jpg)
+![Image](flowcharts/SDConfigCommand%20Write%20Config%20(Char%20Analysis)_Page_2.jpg)
 
---
+---
 
