@@ -9,6 +9,17 @@ Arduino String return and parameter type is supported for beginners, C-string is
 
 ---
 
+# Updates
+- v0.24
+  - Change the default string length for command to 32 btyes (31 characters) and value to 16 bytes (15 characters).
+  - File name is now exactly 13 bytes (8.3 file name)
+  - Byte instead of integer to count TRY
+  - Bug fix on all `strncpy` to deduct one from string size (to account for NULL)
+  - Corrected keywords.txt to include alternation read and write functions
+  - Number of tries changed to 10
+  - Shortened certain error messages to save memory
+
+---
 # Configuration File
 
 The configuration file (config file) must have a 8.3 file name. That means a maximum of eight characters for file name and three for the file extension, for example "hello.txt" is fine while "123456789.text" is not.
@@ -63,12 +74,14 @@ There are plenty of examples online on how to use a SD card with Arduino. To con
 
 # Default Values
 The default values for some of the variables are as follow:
-- Command Length 128 bytes
-- Value length 64 bytes
-- 3 tries to read SD card and open files
+- Command Length 32 bytes
+- Value length 16 bytes
+- 10 tries to read SD card and open files
 - Temporary file name is _temp.tem_
 
-Command and value of a setting in C-string, so one character takes one byte, with a NULL character at the end. Therefore 128 bytes can only store 127 characters, though that should be enough for most cases.
+For the command and value of a setting in C-string, one character takes one byte, with a NULL character at the end. Therefore 32 bytes can only store 31 characters, though that should be enough for most cases.
+
+To save memory, a byte is used for counting command, value and the number of tries, thus `cmd`, `value` and `TRY` should be strictly more than 0 and less than 256 (1-255);
 
 **You need to work within the limit of these values.** You can change their definition in the header file.
 

@@ -6,8 +6,8 @@ bool SDConfigCommand::writeConfig(String myFindCmd, String myNewValue){
   char myFindCmdCString[CMD_SIZE];
   char myNewValueCstring[VALUE_SIZE];
 
-  strncpy(myFindCmdCString, myFindCmd.c_str(), sizeof(myFindCmdCString));
-  strncpy(myNewValueCstring, myNewValue.c_str(), sizeof(myNewValueCstring));
+  strncpy(myFindCmdCString, myFindCmd.c_str(), sizeof(myFindCmdCString)-1);
+  strncpy(myNewValueCstring, myNewValue.c_str(), sizeof(myNewValueCstring)-1);
   if (writeConfig(myFindCmdCString, myNewValueCstring)){ return 1; }
   else{ return 0; }
 }
@@ -44,12 +44,12 @@ bool SDConfigCommand::writeConfig(char* myFindCmd, char* myNewValue){
     
     if(!SD.remove(TEMP_FILENAME)){ 
       Serial.print(TEMP_FILENAME);
-      Serial.println(F(" cannot be removed!"));
+      Serial.println(F(" can't be removed!"));
       return 0; }
       
     else { 
       Serial.print(TEMP_FILENAME);
-      Serial.println(F(" deleted")); }
+      Serial.println(F(" deleted.")); }
       
   }
   
@@ -125,7 +125,7 @@ bool SDConfigCommand::writeConfig(char* myFindCmd, char* myNewValue){
   if (cFile.available()<=0){ // 1 if
     cFile.close();
     tempFile.close();
-    Serial.println (F("No match found"));
+    Serial.println (F("No match found."));
     return 1;
   } // 1 if
 }
@@ -175,11 +175,11 @@ bool SDConfigCommand::updateFile(File &tempFile, unsigned long cmdStart, unsigne
   // Complicated file rename process starts here //
   
   // Delete cFile
-  for (int i=0; i<TRY; i++){
+  for (byte i=0; i<TRY; i++){
     if ( SD.remove(filename) ){  break;  }
       
     else if (i==TRY-1){
-      Serial.println(F("File rename failed: Unable to delete original file."));
+      Serial.println(F("File rename failed."));
       return 0; }
 
   }
@@ -202,7 +202,7 @@ bool SDConfigCommand::updateFile(File &tempFile, unsigned long cmdStart, unsigne
   tempFile.close();
   
   if (!SD.remove(TEMP_FILENAME)){
-    Serial.println(F("temp file cannot be deleted"));
+    Serial.println(F("Temp file can't be deleted"));
   }
   return 1;
 
@@ -210,6 +210,6 @@ bool SDConfigCommand::updateFile(File &tempFile, unsigned long cmdStart, unsigne
 
 void SDConfigCommand::SDWarning(){
 // Prints warning message while writing files
-Serial.println(F("Saving File, please Wait..."));
-Serial.println(F("**DO NOT reset/power off Arduino, close Serial Monitor or remove SD card!**"));
+Serial.println(F("Saving, please wait..."));
+Serial.println(F("**DON'T reset/power off Arduino, close Serial Mon. or remove SD!**"));
 }

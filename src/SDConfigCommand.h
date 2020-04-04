@@ -21,8 +21,8 @@ to be read sequentially will improve performance. Check out the included example
 #define READ_VALUE 1
 
 // The number of char allocated for command and value
-#define CMD_SIZE 128
-#define VALUE_SIZE 64
+#define CMD_SIZE 32
+#define VALUE_SIZE 16
 
 // The file name for temporary file
 #define TEMP_FILENAME "temp.tem"
@@ -59,7 +59,7 @@ class SDConfigCommand {
   private:
     (*callback_Function)();
     File cFile;
-    char filename[20];
+    char filename[13];
     int cs; // chip select pin
     char cmd[CMD_SIZE]="";
     char value[VALUE_SIZE]="";

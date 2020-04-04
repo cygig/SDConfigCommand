@@ -9,9 +9,9 @@ SDConfigCommand::SDConfigCommand(){
 bool SDConfigCommand::set(String myFilename, int myCs, void (*myFunction)()){
 // This is the same as the other one, just that this one takes String for myFilename
 
-  char myFilenameCString[16];
+  char myFilenameCString[13];
   // Use strncopy to limit how much you can copy to avoid overflow
-  strncpy(myFilenameCString, myFilename.c_str(), sizeof(myFilenameCString));
+  strncpy(myFilenameCString, myFilename.c_str(), sizeof(myFilenameCString)-1);
   
   if ( set(myFilenameCString, myCs, myFunction ) ){
     return 1; }
@@ -25,21 +25,21 @@ bool SDConfigCommand::set(String myFilename, int myCs, void (*myFunction)()){
 bool SDConfigCommand::set(char myFilename[], int myCs, void (*myFunction)()){
   
   //Put all settings into private values
-  strncpy(filename, myFilename, sizeof(filename));
+  strncpy(filename, myFilename, sizeof(filename)-1);
   cs = myCs;
   callback_Function = myFunction;
 
   // Begin reading SD card
   // Try for TRY amount of times
-  for(int i=0; i<TRY; i++){
+  for(byte i=0; i<TRY; i++){
     if( SD.begin(cs) ){ return 1; }
 
     else if (i==TRY-1){
-      Serial.println(F("SD card read failed!"));
+      Serial.println(F("SD read failed!"));
       return 0; }
       
     else{ 
-      Serial.print(F("Reading SD card...")); 
+      Serial.print(F("Reading SD...")); 
       Serial.println(i+1);  }
 
   }
@@ -66,18 +66,18 @@ bool SDConfigCommand::openFile(File &myFile, char* myFilename, byte rw){
 // myFile should be passed by reference
    
   // Try to open the file for TRY number of times
-  for (int i=0; i<TRY; i++){
+  for (byte i=0; i<TRY; i++){
     if (myFile=SD.open(myFilename, rw)){ return 1; }
     
     else if (i==TRY-1){
       Serial.print(myFilename);
-      Serial.println(F(" fail to open..."));
+      Serial.println(F(" open failed!"));
       return 0; }
       
     else{
-      Serial.print("Opening ");
+      Serial.print(F("Opening "));
       Serial.print(myFilename);
-      Serial.print("...");
+      Serial.print(F("..."));
       Serial.println(i+1);
     }  
   }
@@ -183,7 +183,7 @@ bool SDConfigCommand::writeCmdValue(char myChar){
 // Concat the incoming char into to form the command or value
 
    if (readMode==READ_CMD){ 
-    int L = strlen(cmd);
+    byte L = strlen(cmd);
     if ( L < (CMD_SIZE-2) ){ // Make sure there is enough memory, account for NULL and new char
       cmd[L]=myChar; // Append to last space
       cmd[L+1]='\0'; // Manually write in NULL
@@ -193,7 +193,7 @@ bool SDConfigCommand::writeCmdValue(char myChar){
 
    // Switch over the value is readMode is set to READ_VALUE
    else{
-      int L = strlen(value);
+      byte L = strlen(value);
       if ( L < (VALUE_SIZE-2) ){
         value[L]=myChar;
         value[L+1]='\0';

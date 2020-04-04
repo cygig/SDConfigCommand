@@ -9,3 +9,5 @@ getValue	KEYWORD2
 getValueS	KEYWORD2
 getValueInt	KEYWORD2
 getValueFloat	KEYWORD2
+ALTreadConfig	KEYWORD2
+ALTwriteConfig	KEYWORD2

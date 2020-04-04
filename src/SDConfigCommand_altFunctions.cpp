@@ -22,18 +22,18 @@ bool SDConfigCommand::ALTreadConfig(){
       if(setting[0]=='/' && setting[1]=='/'){ setting[0]='\0'; continue; }
       else{ // 3 Else
         int E=-1;
-        for (int i=0; i<strlen(setting); i++){
+        for (byte i=0; i<strlen(setting); i++){
           if(setting[i] == '='){  E=i; break; }
         }
 
         if(E == -1){ setting[0]='\0'; continue; }
         else{ //4 Else
-          for (int i=0; i<E; i++){
+          for (byte i=0; i<E; i++){
             cmd[i] = setting[i];  }
           cmd[E] = '\0';
             
-          int C=0;
-          for (int i=E+1; i<strlen(setting); i++){
+          byte C=0;
+          for (byte i=E+1; i<strlen(setting); i++){
             value[C] = setting[i];
             C++;  }
           value[C] = '\0';
@@ -49,7 +49,7 @@ bool SDConfigCommand::ALTreadConfig(){
     } // 2 If
 
     else{ // 2 Else
-      int L = strlen(setting);
+      byte L = strlen(setting);
       if (L < sizeof(setting)-2 ){ // 3 If
         setting[L] = myChar;
         setting[L+1] = '\0';
@@ -90,14 +90,14 @@ bool SDConfigCommand::ALTwriteConfig(char* myFindCmd, char* myNewValue){
         
         int E = -1;
         
-        for (int i=0; i<strlen(setting); i++) { // 4 For
+        for (byte i=0; i<strlen(setting); i++) { // 4 For
           if (setting[i] == '='){ E=i; break; }          
         } // 4 For
 
         if (E==-1){ setting[0]='\0'; continue;}
 
         else{ // 4 Else
-          for (int i=0; i<E; i++){ // 5 For
+          for (byte i=0; i<E; i++){ // 5 For
             cmd[i] = setting[i];  } // 5 For
           cmd[E]='\0';
 
@@ -115,7 +115,7 @@ bool SDConfigCommand::ALTwriteConfig(char* myFindCmd, char* myNewValue){
             cFile.seek(0);
 
             if( SD.exists(TEMP_FILENAME) ){ // 6 If
-              for (int i = 0; i<TRY; i++){ // 7 For
+              for (byte i = 0; i<TRY; i++){ // 7 For
                 if ( SD.remove(TEMP_FILENAME) ){ break; }
                 else if (i==TRY-1){ Serial.println(F("Cannot delete temp file.")); return 0; }
               } // 7 For
@@ -141,7 +141,7 @@ bool SDConfigCommand::ALTwriteConfig(char* myFindCmd, char* myNewValue){
             tempFile.flush();
             cFile.close();
 
-            for (int i=0; i<TRY; i++){ // 6 For
+            for (byte i=0; i<TRY; i++){ // 6 For
               if( SD.remove(filename) ){ break; }
               else if (i==TRY-1){ Serial.println(F("Cannot delete config file.")); return 0; }
             } // 6 For
@@ -155,7 +155,7 @@ bool SDConfigCommand::ALTwriteConfig(char* myFindCmd, char* myNewValue){
 
             cFile.close();
 
-            for (int i=0; i<TRY; i++){  //6 For
+            for (byte i=0; i<TRY; i++){  //6 For
               if ( SD.remove(TEMP_FILENAME) ){ break; }
               else if (i==TRY-1){ Serial.println(F("Cannot delete temp file.")); }
             } // 6 For
@@ -176,7 +176,7 @@ bool SDConfigCommand::ALTwriteConfig(char* myFindCmd, char* myNewValue){
     } // 2 If
 
     else{ // 2 Else
-      int L = strlen(setting);
+      byte L = strlen(setting);
       if (L < sizeof(setting) - 2){ // 3 If
         setting[L] = myChar;
         setting[L+1] = '\0';
@@ -191,4 +191,5 @@ bool SDConfigCommand::ALTwriteConfig(char* myFindCmd, char* myNewValue){
   return 1;
 
 } // Function
+
 */
