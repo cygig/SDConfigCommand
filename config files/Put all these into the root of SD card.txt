@@ -1,0 +1,1 @@
+Put all these into the root of SD card.txt
