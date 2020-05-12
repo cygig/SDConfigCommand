@@ -57,7 +57,7 @@ class SDConfigCommand {
     float getValueFloat();
 
   private:
-    (*callback_Function)();
+    void (*callback_Function)();
     File cFile;
     char filename[13];
     int cs; // chip select pin
