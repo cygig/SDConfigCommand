@@ -10,6 +10,9 @@ Arduino String return and parameter type is supported for beginners, C-string is
 ---
 
 # Updates
+- v0.25
+  - Finally got the time to study some Youtube tutorials and added void as the callback function datatype
+  
 - v0.24
   - Change the default string length for command to 32 btyes (31 characters) and value to 16 bytes (15 characters).
   - File name is now exactly 13 bytes (8.3 file name)
